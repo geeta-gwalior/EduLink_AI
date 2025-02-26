@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Required for session management
 
 # Initialize Vertex AI
-PROJECT_ID = "edulinkai"  # Replace with your Google Cloud Project ID
+PROJECT_ID = ""  # Replace with your Google Cloud Project ID
 LOCATION = "us-central1"  # Change if using a different region
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
