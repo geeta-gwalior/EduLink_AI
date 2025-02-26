@@ -1,0 +1,158 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Header Styles */
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main Styles */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+section {
+    background-color: #f7f7f7;
+    padding: 1em;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section.dark-mode {
+    background-color: #444;
+    color: #fff;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+/* Form Styles */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+textarea.dark-mode, input.dark-mode {
+    background-color: #444;
+    color: #fff;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.dark-mode {
+    background-color: #555;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Text-to-Speech Button Styles */
+
+#text-to-speech-button {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#text-to-speech-button.dark-mode {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Dark Mode Button Styles */
+
+#dark-mode-button {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dark-mode-button.dark-mode {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Light Mode Button Styles */
+
+#light-mode-button {
+    background-color: #fff;
+    color: #333;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#light-mode-button.light-mode {
+    background-color: #333;
+    color: #fff;
+}

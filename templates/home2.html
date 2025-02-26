@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Education Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Important for width calculation */
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #449d44;
+        }
+        #summaryResult, #chatResult, #imageResult {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .error {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>AI Education Hub</h1>
+
+    <div class="container">
+        <h2>Summarization</h2>
+        <textarea id="summarizeText" placeholder="Enter text to summarize"></textarea>
+        <button onclick="summarizeText()">Summarize</button>
+        <div id="summaryResult"></div>
+        <div id="summaryError" class="error"></div>
+
+        <h2>Chatbot</h2>
+        <input type="text" id="chatMessage" placeholder="Ask a question">
+        <button onclick="sendMessage()">Ask</button>
+        <div id="chatResult"></div>
+        <div id="chatError" class="error"></div>
+
+        <h2>Image Generation</h2>
+        <input type="text" id="imagePrompt" placeholder="Enter a prompt for image generation">
+        <button onclick="generateImage()">Generate Image</button>
+        <div id="imageResult"></div>
+        <div id="imageError" class="error"></div>
+    </div>
+
+    <script>
+        async function summarizeText() {
+            const text = document.getElementById('summarizeText').value;
+            document.getElementById('summaryError').innerText = '';
+            try {
+                const response = await fetch('/summarize', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: text })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('summaryResult').innerText = data.summary;
+                } else {
+                    document.getElementById('summaryError').innerText = data.error;
+                    document.getElementById('summaryResult').innerText = '';
+                }
+            } catch (error) {
+                document.getElementById('summaryError').innerText = error;
+                document.getElementById('summaryResult').innerText = '';
+            }
+        }
+
+        async function sendMessage() {
+            const message = document.getElementById('chatMessage').value;
+             document.getElementById('chatError').innerText = '';
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('chatResult').innerText = data.response;
+                } else {
+                    document.getElementById('chatError').innerText = data.error;
+                    document.getElementById('chatResult').innerText = '';
+                }
+            } catch (error) {
+                document.getElementById('chatError').innerText = error;
+                document.getElementById('chatResult').innerText = '';
+            }
+        }
+
+        async function generateImage() {
+            const prompt = document.getElementById('imagePrompt').value;
+            document.getElementById('imageError').innerText = '';
+            try {
+                const response = await fetch('/generate_image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    // Directly display the image using base64 encoded string
+                    document.getElementById('imageResult').innerHTML = `<img src="data:image/png;base64,${data.image}" alt="Generated Image">`;
+                } else {
+                    document.getElementById('imageError').innerText = data.error;
+                    document.getElementById('imageResult').innerHTML = '';
+                }
+            } catch (error) {
+                document.getElementById('imageError').innerText = error;
+                document.getElementById('imageResult').innerHTML = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
